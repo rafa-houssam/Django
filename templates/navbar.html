@@ -9,6 +9,9 @@
 <body>
     <a href="/"> home page</a>
     <a href="/room">room page </a>
+    <form method='GET' action="{% url 'home'%}">
+        <input type="text" name='q' placeholder="search rooms">
+    </form>
     
 </body>
 </html>
