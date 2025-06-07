@@ -2,10 +2,13 @@
 
 {% block content %}
     <h1>This is the home template</h1>
+    <a href="{% url 'create-room' %}">Create room </a>
     <div>
         {% for room in rooms %}
-            <div>
-                <span>@{{room.host.username}}</span>
+        <div>
+            <span>@{{room.host.username}}</span>
+                <a href="{% url 'Update-room' room.id %}">Update room </a>
+                <a href="{% url 'Delete-room' room.id %}">Delete room </a>
                 <br>
                 <a href="{% url 'room' room.id %}">{{ room.id }} ----- {{ room.name }} </a>
                 <br>
