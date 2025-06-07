@@ -5,5 +5,6 @@ urlpatterns = [
     path('room/<str:pk>/',views.room,name='room'),
     path('create-room/',views.CreateRoom,name='create-room'),
     path('Update-room/<str:pk>/',views.UpdateRoom,name='Update-room'),
+    path('Delete-room/<str:pk>/',views.DeleteRoom,name='Delete-room'),
 
 ]
