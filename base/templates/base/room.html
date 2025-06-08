@@ -14,6 +14,28 @@
     <h2>Id: {{room.id}}</h2>
    <h2>title:{{room.name}}</h2>
                 <p>{{room.description}}</p>
+    <div class="comment-wrapper">
+        <h3>conversations</h3>
+        {%for message in room_messages%}
+        <div>
+            <small>@{{message.user}}  {{message.created|timesince}} ago</small>
+            <p>{{message.body}}</p>
+        </div>
+
+        {% endfor %}
+        {% if request.user.is_authenticated %}
+        <div class="comment-form">
+            <form method="POST" action="">
+                {% csrf_token %}
+                <input type="text" placeholder="enter your message here....." name="body">
+
+
+            </form>
+
+        </div>{% endif %}
+        <hr>
+    </div>
+     
 
     
 {% endblock %}
