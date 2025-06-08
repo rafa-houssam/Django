@@ -1,24 +1,32 @@
 {% extends "main.html" %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>this is the room page </title>
-</head>
 <body>
     {%block content %}
+    
+    <style>
+        .room-container{
+            
+            display: grid;
+            grid-template-columns:3fr 1fr;
+        }
+    </style>
 
+    <div class="room-container">
+        <div>
 
-    <h1>this is the room page </h1>
-    <h2>Id: {{room.id}}</h2>
+            
+            
+            <h1>this is the room page </h1>
+            <h2>Id: {{room.id}}</h2>
    <h2>title:{{room.name}}</h2>
                 <p>{{room.description}}</p>
-    <div class="comment-wrapper">
+                <div class="comment-wrapper">
         <h3>conversations</h3>
         {%for message in room_messages%}
         <div>
-            <small>@{{message.user}}  {{message.created|timesince}} ago</small>
+            <small>@{{message.user}}  {{message.created|timesince}} ago 
+                 {% if request.user == message.user  %}<a href="{% url 'deleteMessage' message.id %}">delete my message</a> {% endif %}</small>
             <p>{{message.body}}</p>
         </div>
 
@@ -31,12 +39,29 @@
 
 
             </form>
-
+            
         </div>{% endif %}
         <hr>
     </div>
-     
+    
 
+</div>
+<div>
+    <h3>participants</h3>
+    <hr>
+    {% for participant in participants  %}
+     <div>
+        <p>
+
+            @{{participant.username}}
+        </p>
+       
+     </div>
+    
+    {% endfor %}
+</div>
+
+</div>
     
 {% endblock %}
 

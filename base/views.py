@@ -24,19 +24,31 @@ def home(request):
     room_count=rooms.count()
     context={'rooms':rooms,'topics':topics,'room_count':room_count}
     return render(request,'base/home.html',context);
-def room(request,pk):
-    room=Room.objects.get(id=pk)
-    room_messages=room.message_set.all().order_by('created')
-    if(request.method=="POST"):
-        message=Message.objects.create(
+def room(request, pk):
+    room = Room.objects.get(id=pk)
+    room_messages = room.message_set.all().order_by('created')
+    participants = room.participants.all()
+
+    if request.method == "POST":
+        message = Message.objects.create(
             user=request.user,
             body=request.POST.get('body'),
             room=room
         )
-        return redirect('room',pk=room.id)
 
-    context={'room':room,'room_messages':room_messages}
-    return render(request,'base/room.html',context)
+        # ✅ Add the user to the participants
+        room.participants.add(request.user)
+
+        return redirect('room', pk=room.id)
+
+    context = {
+        'room': room,
+        'room_messages': room_messages,
+        'participants': participants
+    }
+
+    return render(request, 'base/room.html', context)
+
 @login_required(login_url='login')
 def CreateRoom(request):
     form=RoomForm()
@@ -111,3 +123,15 @@ def registerPage(request):
             messages.error(request,"an error occured during registration")
     context={'form':form}
     return render(request,'base/login_register.html',context)
+
+@login_required(login_url='login')
+def deleteMessage(request,pk):
+    message=Message.objects.get(id=pk)
+    if(message.user!=request.user):
+        return HttpResponse("you're not allowed here my friend ")
+    if request.method=='POST':
+        message.delete()
+        return redirect('home')
+    
+    return render(request,'base/delete.html',{'obj':message})
+    
