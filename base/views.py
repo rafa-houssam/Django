@@ -135,4 +135,12 @@ def deleteMessage(request,pk):
         return redirect('home')
     
     return render(request,'base/delete.html',{'obj':message})
+
+def userProfile(request):
+    rooms=Room.objects.filter(user=request.user)
+    messages=Message.objects.filter(user=request.user)
+
+    context={'rooms':rooms,'messages':messages}
+    return render(request,'base/profile.html',context)
+
     
