@@ -21,24 +21,26 @@
           <form class="form" action="" method="POST">
             {% csrf_token %}
             {% for field in form  %}
+            {% if field.label != "Topic" %}
             <div class="form__group">
               <label for="room_name">{{field.label}}</label>
               {{field}}
               {% comment %} <input id="room_name" name="room_name" type="text" placeholder="E.g. Mastering Python + Django" /> {% endcomment %}
-            </div>{% endfor %}
+            </div>{% endif %}{% endfor %}
 
-            {% comment %} <div class="form__group">
+             <div class="form__group">
               <label for="room_topic">Topic</label>
               <input required type="text" name="topic" id="room_topic" list="topic-list" />
               <datalist id="topic-list">
                 <select id="room_topic">
                   <option value="">Select your topic</option>
-                  <option value="Python">Python</option>
-                  <option value="Django">Django</option>
+                  {% for option  in topics  %}
+                  <option value="{{option.name}}">{{option.name}}</option>
+                  {% endfor %}
                 </select>
               </datalist>
 
-            </div> {% endcomment %}
+            </div> 
 
 
             
