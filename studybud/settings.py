@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+AUTH_USER_MODEL='base.User'
 
 ROOT_URLCONF = 'studybud.urls'
 
@@ -71,8 +72,9 @@ TEMPLATES = [
         },
     },
 ]
-
+MEDIA_URL='/images/'
 WSGI_APPLICATION = 'studybud.wsgi.application'
+MEDIA_ROOT=BASE_DIR/'static'/'images'
 
 
 # Database
