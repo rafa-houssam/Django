@@ -10,6 +10,7 @@ urlpatterns = [
     path('logout/',views.Logout,name='logout'),
     path('register/',views.registerPage,name='register'),
     path('delete-message/<str:pk>/',views.deleteMessage,name='deleteMessage'),
-    path('userProfile/<str:pk>/',views.userProfile,name='userprofile')
+    path('userProfile/<str:pk>/',views.userProfile,name='userprofile'),
+    path('update-profile/<str:pk>/',views.updateUser,name='update-profile')
 
 ]

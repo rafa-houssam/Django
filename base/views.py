@@ -158,7 +158,7 @@ def userProfile(request,pk):
     return render(request,'base/profile.html',context)
 
 @login_required(login_url='login')
-def updateUser(request):
+def updateUser(request,pk):
     context={}
     return render(request,'base/update-user.html',context)
     

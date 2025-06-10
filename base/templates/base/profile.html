@@ -30,7 +30,7 @@
             <h3>{{user}}</h3>
             <p>@{{user.username}}</p>
             {% if request.user == user %}
-            <a href="edit-user.html" class="btn btn--main btn--pill">Edit Profile</a>{% endif %}
+            <a href="{% url 'update-profile' user.id %}" class="btn btn--main btn--pill">Edit Profile</a>{% endif %}
           </div>
           <div class="profile__about">
             <h3>About</h3>
