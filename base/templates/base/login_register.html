@@ -71,33 +71,15 @@
 
             <form class="form" action="" method="POST">
               {% csrf_token %}
-              {% comment %} <div class="form__group form__group">
-                <label for="fullname">Full Name</label>
-                <input id="fullname" name="fullname" type="text" placeholder="e.g. Dennis Ivy" />
-              </div> {% endcomment %}
-              <div class="form__group form__group">
-                <label for="room_name">Username</label>
-                <input id="username" name="username" type="text" placeholder="e.g. dennis_ivy" />
-              </div>
+              {% for field  in form   %}
+              
+              
               <div class="form__group">
-                <label for="password">Password</label>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
-                />
-              </div>
+                <label for="{{field.name}}">{{field.label}}</label>
+                {{field}}
+              </div>{% endfor %}
 
-              <div class="form__group">
-                <label for="confirm_password">Confirm Password</label>
-                <input
-                  id="confirm_password"
-                  name="confirm_password"
-                  type="password"
-                  placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
-                />
-              </div>
+              
 
               <button class="btn btn--main" type="submit">
                 <svg
