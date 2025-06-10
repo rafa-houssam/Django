@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import Room,Topic,Message
-from .forms import RoomForm
+from .forms import RoomForm,UserForm
 from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -158,7 +158,16 @@ def userProfile(request,pk):
     return render(request,'base/profile.html',context)
 
 @login_required(login_url='login')
-def updateUser(request,pk):
-    context={}
-    return render(request,'base/update-user.html',context)
-    
+def updateUser(request, pk):
+    user = request.user
+    form = UserForm(instance=user)
+
+    if request.method == "POST":
+        form = UserForm(request.POST, instance=user)  # <-- FIX: include instance
+        if form.is_valid():
+            form.save()  # no need to assign to user again
+            return redirect('userprofile', pk=user.id)
+
+    context = {'form': form}
+    return render(request, 'base/update-user.html', context)
+

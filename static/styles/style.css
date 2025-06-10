@@ -1102,8 +1102,9 @@ a {
   position: absolute;
   z-index: 111;
   bottom: 0;
-  left: 0;
-  right: 0;
+  left: 2px;
+  right: 2px;
+  width: 400px;
   background: transparent;
 }
 
