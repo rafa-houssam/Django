@@ -21,10 +21,7 @@
                 <div class="layout__body">
                     <form class="form" action="" method="POST" enctype='multipart/form-data'>
                       {% csrf_token %}
-                        {% comment %} <div class="form__group">
-                            <label for="profile_pic">Avatar</label>
-                            <input id="profile_pic" name="profile_pic" type="file" />
-                        </div> {% endcomment %}
+                        
 {% for field in form  %}
                         <div class="form__group">
                             <label for="user_bio">{{field.label}}</label>
